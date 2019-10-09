@@ -4,9 +4,16 @@ namespace Laratube\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laratube\Channel;
+use Laratube\Http\Requests\Channel\UpdateChannelRequest;
 
 class ChannelController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth'])->only(['update']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +53,7 @@ class ChannelController extends Controller
      */
     public function show(Channel $channel)
     {
-
+        return view('front.pages.channels.show-or-edit', compact('channel'));
     }
 
     /**
@@ -57,19 +64,27 @@ class ChannelController extends Controller
      */
     public function edit(Channel $channel)
     {
-        return view('front.pages.channels.edit', compact('channel'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Channel $channel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateChannelRequest $request, Channel $channel)
     {
-        //
+        if ($request->hasFile('image')) {
+            $channel->clearMediaCollection('images');
+            $channel->addMediaFromRequest('image')
+                ->toMediaCollection('images');
+        }
+
+        $channel->update($request->except(['image']));
+
+        return redirect()->back();
     }
 
     /**

@@ -55,7 +55,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('channels.edit', auth()->user()->channel) }}">
+                                    <a class="dropdown-item" href="{{ route('channels.show', auth()->user()->channel) }}">
                                         {{ __('My Channel') }}
                                     </a>
 
