@@ -1,10 +1,11 @@
 <?php
 
-namespace App;
+namespace Laratube;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -15,9 +16,21 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public $incrementing = false;
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+        // $model->id = Str::uuid();
+            $model->{$model->getKeyName()} = (string) Str::uuid();
+        });
+    }
 
     /**
      * The attributes that should be hidden for arrays.
