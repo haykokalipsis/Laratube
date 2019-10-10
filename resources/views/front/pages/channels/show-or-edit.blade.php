@@ -36,6 +36,26 @@
                                     </p>
                                 </div>
 
+                                <div class="text-center">
+                                    <subscribe-button
+                                            inline-template
+                                            :initial-subscriptions="{{ $channel->subscriptions }}"
+                                            :channel="{{ $channel }}">
+                                        <button @click.prevent="onToggleSubscription" class="btn btn-danger" :disabled="loading">
+                                            <template v-if="! loading">
+                                                @{{ owner ? '' : subscribed ? 'Unsubscribe' : 'Subscribe' }}
+                                                @{{ subscriptions.length }}
+                                                @{{ owner ? 'Subscribers' : '' }}
+                                            </template>
+
+                                            <template v-else>
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                Loading...
+                                            </template>
+                                        </button>
+                                    </subscribe-button>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">name</label>
                                     <input type="text" name="name" id="name" class="form-control" value="{{ $channel->name }}">
@@ -78,6 +98,25 @@
                                 </p>
                             </div>
 
+                            <div class="text-center">
+                                <subscribe-button
+                                        inline-template
+                                        :initial-subscriptions="{{ $channel->subscriptions }}"
+                                        :channel="{{ $channel }}">
+                                    <button @click.prevent="onToggleSubscription" class="btn btn-danger" :disabled="loading">
+                                        <template v-if="! loading">
+                                            @{{ owner ? '' : subscribed ? 'Unsubscribe' : 'Subscribe' }}
+                                            @{{ subscriptions.length }}
+                                            @{{ owner ? 'Subscribers' : '' }}
+                                        </template>
+
+                                        <template v-else>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </template>
+                                    </button>
+                                </subscribe-button>
+                            </div>
                         @endif
                     </div>
 
@@ -86,3 +125,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+
+@endpush

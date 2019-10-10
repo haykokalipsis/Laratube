@@ -80,5 +80,21 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        {{--window.AuthUser = '{!! auth()->user() !!}';--}}
+        window.AuthUser = @json(auth()->user());
+
+        window.__auth = function () {
+            try {
+                return AuthUser;
+            } catch (e) {
+                return null;
+            }
+        }
+    </script>
+
+    @stack('scripts')
+
 </body>
 </html>
