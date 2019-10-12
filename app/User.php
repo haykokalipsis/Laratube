@@ -49,9 +49,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function channel()
     {
         return $this->hasOne(Channel::class);
-    } 
+    }
+
+    public function toggleVote($entity, $type)
+    {
+        $vote = $entity->votes->where('user_id', $this->id)->first();
+
+        // Return either updated vote or new vote, depending on has the user voted on this entity before.
+        if ($vote) {
+            $vote->update([
+                'type' => $type
+            ]);
+
+            return $vote->refresh();
+        } else {
+            return $entity->votes()->create([
+                'type' => $type,
+                'user_id' => $this->id
+            ]);
+        }
+    }
+
 }

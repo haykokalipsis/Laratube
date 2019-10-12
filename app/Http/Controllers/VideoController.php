@@ -11,7 +11,6 @@ class VideoController extends Controller
     public function updateViews(Video $video)
     {
         $video->increment('views');
-
         return response()->json();
     }
 

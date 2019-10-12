@@ -30,7 +30,14 @@
 
                             {{ $video->views }} {{ str_plural('view', $video->views) }}
                         </div>
+
+                        <votes
+                            :default_votes="{{ $video->votes }}"
+                            entity_owner="{{ $video->channel->user_id }}"
+                            entity_id="{{ $video->id }}">
+                        </votes>
                     </div>
+
 
                     <hr>
 
@@ -46,17 +53,6 @@
                         @endif
                     </div>
 
-                    <div>
-                        <span style="color: green">
-                            <i class="far fa-thumbs-up"></i>
-                            {{-- <i class="fas fa-thumbs-up"></i> --}}
-                        </span>
-
-                        23k
-                        <i class="far fa-thumbs-down"></i>
-                        svg-thumbs-down
-                        11k
-                    </div>
                 </div>
 
                 <hr>
@@ -93,6 +89,24 @@
         .vjs-default-skin {
             width: 100%;
         }
+
+        .thumbs-up,
+        .thumbs-down {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            fill: currentColor;
+        }
+
+        .thumbs-up-active,
+        .thumbs-down-active {
+            color: #3EA6FF;
+        }
+
+        .thumbs-down {
+            margin-left: 1rem;
+        }
+
     </style>
 @endpush
 
