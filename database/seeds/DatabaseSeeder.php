@@ -18,11 +18,13 @@ class DatabaseSeeder extends Seeder
     {
 //         $this->call(UsersTableSeeder::class);
         $user1 = factory(User::class)->create([
-            'email' => 'haykokalipsis@gmail.com'
+            'email' => 'haykokalipsis@gmail.com',
+            'password' => '$2y$10$3vsblDfHwb15QOcvAgUw0uRQcpKTUE6R2mXE47WsvAUlQJnouQ3Qm'
         ]);
 
         $user2 = factory(User::class)->create([
-            'email' => 'haykokalipsis@gnail.com'
+            'email' => 'haykokalipsis@gnail.com',
+            'password' => '$2y$10$3vsblDfHwb15QOcvAgUw0uRQcpKTUE6R2mXE47WsvAUlQJnouQ3Qm'
         ]);
 
         $channel1 = factory(Channel::class)->create([

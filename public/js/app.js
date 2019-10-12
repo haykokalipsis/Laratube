@@ -32880,9 +32880,13 @@ module.exports = g;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // TODO This player realization on vue is buggy, need this line to ignore video-js component. Find another way.
 
-__webpack_require__(/*! ./components/subscribe-button */ "./resources/js/components/subscribe-button.js"); // Vue.component('component1', () => import('./components/Component1.vue'));
+Vue.config.ignoredElements = ['video-js'];
+
+__webpack_require__(/*! ./components/subscribe-button */ "./resources/js/components/subscribe-button.js");
+
+__webpack_require__(/*! ./components/channel-uploads */ "./resources/js/components/channel-uploads.js"); // Vue.component('component1', () => import('./components/Component1.vue'));
 
 
 var app = new Vue({
@@ -32940,6 +32944,92 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/channel-uploads.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/channel-uploads.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Vue.component('channel-uploads', {
+  props: {
+    channel: {
+      type: Object,
+      required: true,
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
+  data: function data() {
+    return {
+      selected: false,
+      videos: [],
+      // At first videos uploaded from client, then they get replaced by the ones that come from server
+      progress: {},
+      uploads: [],
+      // Temporary array for videos we get from server
+      intervals: {} // After every upload is completed, set an interval that will make request to server every x seconds to fetch fresh copy of video, for percentage field
+
+    };
+  },
+  methods: {
+    onUpload: function onUpload() {
+      var _this = this;
+
+      this.selected = true; // Array.from converts any iterable to array. Fileslist is not an array but is iterable
+
+      this.videos = Array.from(this.$refs.videos.files);
+      var uploaders = this.videos.map(function (video) {
+        _this.progress[video.name] = 0;
+        var formData = new FormData();
+        formData.append('video', video);
+        formData.append('title', video.name);
+        formData.append('size', video.size);
+        return axios.post("/channels/".concat(_this.channel.id, "/videos"), formData, {
+          onUploadProgress: function onUploadProgress(event) {
+            _this.progress[video.name] = Math.ceil(event.loaded / event.total * 100);
+            console.log(_this.progress[video.name]); // Sometimes when you update nested objects, vue does`nt update correctly, we need this line
+
+            _this.$forceUpdate();
+          }
+        }).then(function (response) {
+          _this.uploads.push(response.data);
+        });
+      }); // axios.all(uploaders) means when all the uploads are done.
+
+      axios.all(uploaders).then(function () {
+        // We are replacing videos we got from client with the videos we got from server
+        _this.videos = _this.uploads; // Create interval for each video to get fresh copy of it every x second and get the percentage.  
+
+        _this.videos.forEach(function (video) {
+          _this.intervals[video.id] = setInterval(function () {
+            axios.get("/videos/".concat(video.id)).then(function (_ref) {
+              var data = _ref.data;
+
+              // Clear interval and stop fetching new copy, if fresh returned videos percentage is 100
+              if (data.percentage === 100) {
+                clearInterval(_this.intervals[video.id]);
+              } // We are mapping the videos to find the one we just got from the server and replace the matching one from videos array.
+
+
+              _this.videos = _this.videos.map(function (v) {
+                if (v.id === data.id) {
+                  return data;
+                }
+
+                return v;
+              });
+            });
+          }, 3000);
+        });
+      });
+    }
+  }
+});
 
 /***/ }),
 

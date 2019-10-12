@@ -12,6 +12,7 @@ class Channel extends Model implements HasMedia
 {
     use HasMediaTrait;
 
+    // Relationships    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,6 +23,12 @@ class Channel extends Model implements HasMedia
         return $this->hasMany(Subscription::class);
     }
     
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    } 
+    
+    // Other methods
     public function belongsToAuthenticatedUser()
     {
         if ( ! auth()->check())
