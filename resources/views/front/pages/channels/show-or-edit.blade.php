@@ -42,21 +42,9 @@
 
                                 <div class="text-center">
                                     <subscribe-button
-                                            inline-template
+                                            {{-- inline-template --}}
                                             :initial-subscriptions="{{ $channel->subscriptions }}"
                                             :channel="{{ $channel }}">
-                                        <button @click.prevent="onToggleSubscription" class="btn btn-danger" :disabled="loading">
-                                            <template v-if="! loading">
-                                                @{{ owner ? '' : subscribed ? 'Unsubscribe' : 'Subscribe' }}
-                                                @{{ subscriptions.length }}
-                                                @{{ owner ? 'Subscribers' : '' }}
-                                            </template>
-
-                                            <template v-else>
-                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                Loading...
-                                            </template>
-                                        </button>
                                     </subscribe-button>
                                 </div>
 
@@ -103,7 +91,7 @@
                             </div>
 
                             <div class="text-center">
-                                <subscribe-button
+                                {{-- <subscribe-button
                                         inline-template
                                         :initial-subscriptions="{{ $channel->subscriptions }}"
                                         :channel="{{ $channel }}">
@@ -119,6 +107,11 @@
                                             Loading...
                                         </template>
                                     </button>
+                                </subscribe-button> --}}
+
+                                <subscribe-button
+                                        :initial-subscriptions="{{ $channel->subscriptions }}"
+                                        :channel="{{ $channel }}">
                                 </subscribe-button>
                             </div>
                         @endif

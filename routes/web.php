@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('channels', 'ChannelController');
 Route::get('videos/{video}', 'UploadVideoController@show');
+Route::put('videos/{video}', 'VideoController@updateViews');
+Route::put('videos/{video}/update', 'VideoController@update')->middleware(['auth'])->name('videos.update');
 
 Route::group([
     'middleware' => ['auth']
