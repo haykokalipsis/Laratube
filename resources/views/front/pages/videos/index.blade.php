@@ -33,6 +33,7 @@
 
                         <votes
                             :default_votes="{{ $video->votes }}"
+                            entity_type="video"
                             entity_owner="{{ $video->channel->user_id }}"
                             entity_id="{{ $video->id }}">
                         </votes>
@@ -53,30 +54,32 @@
                         @endif
                     </div>
 
-                </div>
+                    <hr>
 
-                <hr>
-
-                <div class="d-flex justify-content-between align-items-center mt-5">
-                    <div class="media">
-                        <img src="https://" width="50" height="50"  alt="" class="rounded-circle mr-3">
-                        <div class="media-body ml-2">
-                            <h5 class="mt-0 mb-0">{{ $video->channel->name }}</h5>
-                            <span class="small">Published on {{$video->created_at->toFormattedDateString()  }}</span>
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <div class="media">
+                            <img src="https://via.placeholder.com/50x50/" width="50" height="50"  alt="" class="rounded-circle mr-3">
+                            <div class="media-body ml-2">
+                                <h5 class="mt-0 mb-0">{{ $video->channel->name }}</h5>
+                                <span class="small">Published on {{$video->created_at->toFormattedDateString()  }}</span>
+                            </div>
                         </div>
+
+                        <subscribe-button
+                                :initial-subscriptions="{{ $video->channel->subscriptions }}"
+                                :channel="{{ $video->channel }}">
+                        </subscribe-button>
                     </div>
 
-                    <subscribe-button
-                            class="mr-3"
-                            :initial-subscriptions="{{ $video->channel->subscriptions }}"
-                            :channel="{{ $video->channel }}">
-                    </subscribe-button>
                 </div>
 
                 @if($video->editable())
                     </form>
                 @endif
             </div>
+
+            <comments :video="{{ $video }}"></comments>
+
         </div>
     </div>
 </div>
@@ -105,6 +108,14 @@
 
         .thumbs-down {
             margin-left: 1rem;
+        }
+
+        .w-full {
+            width: 100% !important;
+        }
+
+        .w-80 {
+            width: 80% !important;
         }
 
     </style>

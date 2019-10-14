@@ -31,6 +31,12 @@ export default {
             required: true,
             type: String,
             default: ''
+        },
+
+        entity_type: {
+            required: true,
+            type: String,
+            default: ''
         }
     },
 
@@ -73,20 +79,20 @@ export default {
     },
 
      methods: {
-        onVote(type) {
+        onVote(vote_type) {
             if ( ! __auth())
                 return alert('Please login to vote');
 
-            if (__auth().id === this.entity_owner.user_id)
+            if (__auth().id === this.entity_owner)
                 return alert('You can not vote this item');
 
-            if (type === 'up' && this.upVoted)
+            if (vote_type === 'up' && this.upVoted)
                 return;
 
-            if (type === 'down' && this.downVoted)
+            if (vote_type === 'down' && this.downVoted)
                 return;
 
-            axios.post(`/votes/${this.entity_id}/${type}`)
+            axios.post(`/votes/${this.entity_type}/${this.entity_id}/${vote_type}`)
                 .then( ({data}) => {
                     // Has this entity been voted by this user before?
                     if (this.upVoted || this.downVoted) {

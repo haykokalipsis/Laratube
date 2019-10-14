@@ -14,7 +14,7 @@ class UploadVideoController extends Controller
     {
         return view('front.pages.channels.upload', compact('channel'));
     }
-    
+
     public function store(Channel $channel, Request $request)
     {
 

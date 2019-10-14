@@ -7,8 +7,9 @@ Vue.config.ignoredElements = ['video-js'];
 
 Vue.component('subscribe-button', require('./components/subscribe-button.vue').default);
 Vue.component('votes', require('./components/votes.vue').default);
+Vue.component('comments', require('./components/comments.vue').default);
 require('./components/channel-uploads');
-// Vue.component('component1', () => import('./components/Component1.vue'));
+// Vue.component('component1', () => import('./components/Component1.vue '));
 
 const app = new Vue({
     el: '#app'

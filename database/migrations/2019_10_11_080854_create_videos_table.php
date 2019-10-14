@@ -16,7 +16,7 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->uuid('id');
             $table->uuid('channel_id');
-            // $table->bigInteger('views')->default(0);
+            $table->bigInteger('views')->default(0);
             $table->string('title')->nullable();
             $table->string('thumbnail')->nullable();
             $table->text('description')->nullable();

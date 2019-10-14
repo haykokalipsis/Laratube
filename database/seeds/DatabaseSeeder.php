@@ -1,11 +1,14 @@
 <?php
 
+use Laratube\User;
+use Laratube\Video;
+use Laratube\Channel;
+use Laratube\Comment;
+use Laratube\Subscription;
+
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Laratube\Channel;
-use Laratube\Subscription;
-use Laratube\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -52,6 +55,26 @@ class DatabaseSeeder extends Seeder
         // create another 10000 subscriptions for each channel
         factory(Subscription::class, 100)->create([
             'channel_id' => $channel2->id
+        ]);
+
+        // Create a video and a lot of comments to it
+        // 1. Crate a video
+        $video = factory(Video::class)->create([
+            'channel_id' => $channel1->id
+        ]);
+
+        // 2. Create 50 comments to that video, all parent
+        factory(Comment::class, 50)->create([
+            'video_id' => $video->id
+        ]);
+
+        // 3. Get the first comment out of those 50
+        $comment = Comment::first();
+
+        // 4. Add 20 replies to that comment
+        factory(Comment::class, 20)->create([
+            'video_id' => $video->id,
+            'comment_id' => $comment->id,
         ]);
     }
 }

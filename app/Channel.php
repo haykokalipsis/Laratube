@@ -4,15 +4,16 @@ namespace Laratube;
 
 //use Illuminate\Database\Eloquent\Model; Удоляй
 
+use Laratube\Video;
+use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
 
 class Channel extends Model implements HasMedia
 {
     use HasMediaTrait;
 
-    // Relationships    
+    // Relationships
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,12 +23,12 @@ class Channel extends Model implements HasMedia
     {
         return $this->hasMany(Subscription::class);
     }
-    
+
     public function videos()
     {
         return $this->hasMany(Video::class);
-    } 
-    
+    }
+
     // Other methods
     public function belongsToAuthenticatedUser()
     {
@@ -36,7 +37,7 @@ class Channel extends Model implements HasMedia
 
         return $this->user_id === auth()->user()->id;
     }
-    
+
     public function registerMediaConversions( ? Media $media = null)
     {
         $this->addMediaConversion('thumb')
