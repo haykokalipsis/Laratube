@@ -118,6 +118,44 @@
                     </div>
 
                 </div>
+
+                <div class="card">
+                    <div class="card-header">Videos</div>
+
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Views</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($videos as $video )
+                                    <tr>
+                                        <td><img width="40px" height="40px" src="{{ $video->thumbnail }}" alt=""></td>
+                                        <td>{{ $video->title }}</td>
+                                        <td>{{ $video->views }}</td>
+                                        <td>{{ $video->percentage === 100 ? 'Live' : 'processing... ' . $video->percentage . '%'}}</td>
+                                        <td>
+                                            @if($video->percentage === 100)
+                                                <a href="{{ route('videos.show', $video->id) }}">View</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <div class="row justify-content-center">
+                            {{ $videos->links() }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
