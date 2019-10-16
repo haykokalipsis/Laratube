@@ -3,13 +3,14 @@
 namespace Laratube\Jobs\Videos;
 
 use FFMpeg;
+use Laratube\Video;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Laratube\Video;
 //use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class ConvertForStreaming implements ShouldQueue
@@ -50,6 +51,13 @@ class ConvertForStreaming implements ShouldQueue
             ->addFormat($mid)
             ->addFormat($high)
             ->save("public/videos/{$this->video->id}/{$this->video->id}.m3u8"); // m3u8 is extension required for streaming files.
-        
+
+        Storage::delete($this->video->path);
+
+        $this->video->update([
+                'percentage' => 100,
+                // 'path' => converted
+                // 'views' => 30
+            ]);
     }
 }
