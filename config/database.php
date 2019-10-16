@@ -22,7 +22,7 @@ return [
     */
 
     // 'default' => env('DB_CONNECTION', 'heroku_mysql'),
-	'default' => 'mysql',
+	'default' => 'heroku_mysql',
 
     /*
     |--------------------------------------------------------------------------
