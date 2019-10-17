@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    'default' => env('QUEUE_CONNECTION', 'redis_heroku'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,6 +65,14 @@ return [
             'retry_after' => 90,
             'block_for' => null,
         ],
+		
+		'redis_heroku' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => env('REDIS_QUEUE', 'default'),
+            'retry_after' => 90,
+            'block_for' => null,
+        ],
 
     ],
 
@@ -80,6 +88,7 @@ return [
     */
 
     'failed' => [
+	        // 'redis' => env('DB_CONNECTION', 'redis_heroku'),
         'database' => env('DB_CONNECTION', 'mysql'),
         'table' => 'failed_jobs',
     ],
