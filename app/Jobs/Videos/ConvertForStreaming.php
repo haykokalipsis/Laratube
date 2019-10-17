@@ -55,9 +55,7 @@ class ConvertForStreaming implements ShouldQueue
         Storage::delete($this->video->path);
 
         $this->video->update([
-                'percentage' => 100,
-                // 'path' => converted
-                // 'views' => 30
+                'percentage' => 100
             ]);
     }
 }
