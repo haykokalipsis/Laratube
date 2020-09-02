@@ -3,6 +3,7 @@
 namespace Laratube\Jobs\Videos;
 
 use FFMpeg;
+//use FFMpeg\FFMpeg;
 use Laratube\Video;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+
 //use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class ConvertForStreaming implements ShouldQueue

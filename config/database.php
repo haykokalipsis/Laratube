@@ -22,7 +22,7 @@ return [
     */
 
     // 'default' => env('DB_CONNECTION', 'heroku_mysql'),
-	'default' => 'heroku_mysql',
+	'default' => 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -53,9 +53,9 @@ return [
              'driver' => 'mysql',
              'host' => env('db_host', '127.0.0.1'),
              'port' => env('db_port', '3306'),
-             'database' => env('db_database', 'forge'),
-             'username' => env('db_username', 'forge'),
-             'password' => env('db_password', ''),
+             'database' => env('DB_DATABASE', 'forge'),
+             'username' => env('DB_USERNAME', 'forge'),
+             'password' => env('DB_PASSWORD', ''),
              'unix_socket' => env('db_socket', ''),
              'charset' => 'utf8mb4',
              'collation' => 'utf8mb4_unicode_ci',
@@ -63,11 +63,10 @@ return [
              'prefix_indexes' => true,
              'strict' => true,
              'engine' => null,
-             'options' => array_filter([
+//             'options' => array_filter([
                  // pdo::mysql_attr_ssl_ca => env('mysql_attr_ssl_ca'),
-             ]),
+//             ]),
          ],
-
 
         'heroku_mysql' => [
             'driver' => 'mysql',
@@ -132,28 +131,28 @@ return [
     |
     */
 
-    'redis' => [
-
-        'client' => env('REDIS_CLIENT', 'predis'),
-
-        'options' => [
-            'cluster' => env('REDIS_CLUSTER', 'predis'),
-        ],
-
-        'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_DB', 0),
-        ],
-
-        'cache' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_CACHE_DB', 1),
-        ],
-
-    ],
+//    'redis' => [
+//
+//        'client' => env('REDIS_CLIENT', 'predis'),
+//
+//        'options' => [
+//            'cluster' => env('REDIS_CLUSTER', 'predis'),
+//        ],
+//
+//        'default' => [
+//            'host' => env('REDIS_HOST', '127.0.0.1'),
+//            'password' => env('REDIS_PASSWORD', null),
+//            'port' => env('REDIS_PORT', 6379),
+//            'database' => env('REDIS_DB', 0),
+//        ],
+//
+//        'cache' => [
+//            'host' => env('REDIS_HOST', '127.0.0.1'),
+//            'password' => env('REDIS_PASSWORD', null),
+//            'port' => env('REDIS_PORT', 6379),
+//            'database' => env('REDIS_CACHE_DB', 1),
+//        ],
+//
+//    ],
 
 ];
