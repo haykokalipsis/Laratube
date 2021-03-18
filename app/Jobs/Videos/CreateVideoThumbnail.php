@@ -3,6 +3,7 @@
 namespace Laratube\Jobs\Videos;
 
 use FFMpeg;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
