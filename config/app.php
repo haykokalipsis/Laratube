@@ -174,7 +174,8 @@ return [
         // Laratube\Providers\BroadcastServiceProvider::class,
         Laratube\Providers\EventServiceProvider::class,
         Laratube\Providers\RouteServiceProvider::class,
-
+        Laratube\Providers\GoogleDriveServiceProvider::class,
+        Laratube\Providers\DropboxFilesystemServiceProvider::class,
     ],
 
     /*
