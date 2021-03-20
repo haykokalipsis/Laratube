@@ -31,12 +31,11 @@ Route::get('test', function() {
 //    Storage::disk('google')->rename($files[0], 'New Name');
 //    $response = Storage::disk('google')->download($files[0], 'file.jpg'); $response->send();
 //    Storage::disk('dropbox')->makeDirectory('New Directory');
-//    dd(Storage::disk('dropbox')->allFiles());
-    dd(Storage::disk('dropbox')->put('LaraTube', 'Hello World'));
+    dd(Storage::disk('dropbox')->allFiles());
+//    dd(Storage::disk('dropbox')->put('LaraTube', 'Hello World'));
 });
 
 Auth::routes();
-
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('channels', 'ChannelController');
