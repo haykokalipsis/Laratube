@@ -1,10 +1,10 @@
 <?php
 
-namespace Laratube\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laratube\Video;
-use Laratube\Http\Requests\Videos\UpdateVideoRequest;
+use App\Models\Video;
+use App\Http\Requests\Videos\UpdateVideoRequest;
 
 class VideoController extends Controller
 {

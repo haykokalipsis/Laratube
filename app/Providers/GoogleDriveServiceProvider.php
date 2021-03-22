@@ -1,6 +1,6 @@
 <?php
 
-namespace Laratube\Providers;
+namespace App\Providers;
 
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use Illuminate\Support\Facades\Storage;

@@ -33,7 +33,9 @@
                                             Loading thumbnail ...
                                         </div>
 
+{{--                                        <img v-else :src="video.thumbnail" style="width: 100%;" alt="">--}}
                                         <img v-else :src="video.thumbnail" style="width: 100%;" alt="">
+{{--                                        <img v-else :src="{{Storage()->url('video.thumbnail')}}" style="width: 100%;" alt="">--}}
                                     </div>
 
                                     <div class="col-md-4">

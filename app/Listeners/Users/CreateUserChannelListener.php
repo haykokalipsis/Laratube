@@ -1,11 +1,11 @@
 <?php
 
-namespace Laratube\Listeners\User;
+namespace App\Listeners\Users;
 
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
-class CreateUserChannel
+class CreateUserChannelListener
 {
     /**
      * Create the event listener.

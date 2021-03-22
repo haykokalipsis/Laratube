@@ -1,6 +1,6 @@
 <?php
 
-namespace Laratube\Jobs\Videos;
+namespace App\Jobs\Videos;
 
 use FFMpeg;
 
@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Storage;
-use Laratube\Video;
+use App\Models\Video;
 
 class CreateVideoThumbnail implements ShouldQueue
 {
@@ -34,16 +34,19 @@ class CreateVideoThumbnail implements ShouldQueue
      */
     public function handle()
     {
-        FFMpeg::fromDisk('local')
+        FFMpeg::fromDisk('public')
+//            ->open('FFMPEG/channels/0ba21459-4e7f-4041-95bc-bc62187334e3/videos/KoesIx09gybZHtHwrelj3yvUZHTrlHE3HFtDCg8D.mkv')
             ->open($this->video->path)
+//            ->open('http://laratube.test/FFMPEG/channels/0ba21459-4e7f-4041-95bc-bc62187334e3/videos/5KcGbYinlOkkVgRt0ylWr0otREHGQFqczCYsf6Qz.mkv')
             ->getFrameFromSeconds(1)
             ->export()
-            ->toDisk('local')
-            ->save("public/thumbnails/{$this->video->id}.png");
+            ->toDisk('public')
+            ->save("/FFMPEG/thumbnails/{$this->video->id}.png");
 
         $this->video->update([
 //            'thumbnail' => "/thumbnails/{$this->video->id}.png"
-            'thumbnail' => Storage::url("public/thumbnails/{$this->video->id}.png")
+            'thumbnail' => "/FFMPEG/thumbnails/{$this->video->id}.png"
+//            'thumbnail' => Storage::disk("public")->url("/FFMPEG/thumbnails/{$this->video->id}.png")
         ]);
     }
 }

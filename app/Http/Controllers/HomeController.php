@@ -1,10 +1,12 @@
 <?php
 
-namespace Laratube\Http\Controllers;
+namespace App\Http\Controllers;
 
+use App\Models\Channel;
+use App\Models\Video;
 use Illuminate\Http\Request;
-use Laratube\Channel;
-use Laratube\Video;
+
+
 
 class HomeController extends Controller
 {

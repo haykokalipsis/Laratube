@@ -1,9 +1,9 @@
 <?php
 
-namespace Laratube\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Laratube\Channel;
-use Laratube\Subscription;
+use App\Models\Channel;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -26,13 +26,13 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Laratube\Subscription  $subscription
+     * @param  \App\Subscription  $subscription
      * @return \Illuminate\Http\Response
      */
     public function destroy(Channel $channel, Subscription $subscription)
     {
         $subscription->delete();
-        
+
         return response()->json([], 200);
     }
 }

@@ -1,9 +1,15 @@
 <?php
 
-namespace Laratube;
+namespace App\Models;
+
+use App\Application\Uuids;
+use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use Uuids;
+
+    protected $guarded = [];
     protected $with = ['user', 'votes'];
     protected $appends = ['repliesCount'];
 

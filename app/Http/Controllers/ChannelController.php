@@ -1,16 +1,17 @@
 <?php
 
-namespace Laratube\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laratube\Channel;
-use Laratube\Http\Requests\Channel\UpdateChannelRequest;
+use App\Models\Channel;
+//use App\Http\Requests\Channel\UpdateChannelRequest;
 
 class ChannelController extends Controller
 {
 
     public function __construct()
     {
+//        dd(6);
         $this->middleware(['auth'])->only(['update']);
     }
 
@@ -45,14 +46,9 @@ class ChannelController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Channel $channel)
     {
+//        dd($id);
         $videos = $channel->videos()->paginate(2);
         return view('front.pages.channels.show-or-edit', compact(['channel', 'videos']));
     }

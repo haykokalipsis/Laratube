@@ -1,6 +1,6 @@
 require('./bootstrap');
 
-window.Vue = require('vue');
+window.Vue = require('vue').default;
 
 // TODO This player realization on vue is buggy, need this line to ignore video-js component. Find another way.
 Vue.config.ignoredElements = ['video-js'];

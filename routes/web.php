@@ -1,23 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+//use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('front.pages.welcome');
 });
 
-Route::get('test', function() {
+//Route::get('test', function() {
 //    Storage::disk('google')->makeDirectory('New Directory');
 //    $directories = Storage::disk('google')->directories();
 //    Storage::disk('google')->deleteDirectory($directories[0]);
@@ -31,26 +21,26 @@ Route::get('test', function() {
 //    Storage::disk('google')->rename($files[0], 'New Name');
 //    $response = Storage::disk('google')->download($files[0], 'file.jpg'); $response->send();
 //    Storage::disk('dropbox')->makeDirectory('New Directory');
-    dd(Storage::disk('dropbox')->allFiles());
+//    dd(Storage::disk('dropbox')->allFiles());
 //    dd(Storage::disk('dropbox')->put('LaraTube', 'Hello World'));
-});
+//});
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('channels', 'ChannelController');
-Route::get('videos/{video}/comments', 'CommentController@comments');
-Route::get('comments/{comment}/replies', 'CommentController@replies');
-Route::get('videos/{video}', 'UploadVideoController@show')->name('videos.show');
-Route::put('videos/{video}', 'VideoController@updateViews');
-Route::put('videos/{video}/update', 'VideoController@update')->middleware(['auth'])->name('videos.update');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');;
+Route::resource('channels', \App\Http\Controllers\ChannelController::class)->only(['show', 'update', 'destroy']);
+Route::get('videos/{video}/comments', [\App\Http\Controllers\CommentController::class, 'comments']);
+Route::get('comments/{comment}/replies', [\App\Http\Controllers\CommentController::class, 'replies']);
+Route::get('videos/{video}', [\App\Http\Controllers\UploadVideoController::class, 'show'])->name('videos.show');
+Route::put('videos/{video}', [\App\Http\Controllers\VideoController::class, 'updateViews']);
+Route::put('videos/{video}/update', [\App\Http\Controllers\VideoController::class, 'update'])->middleware(['auth'])->name('videos.update');
 
 Route::group([
     'middleware' => ['auth']
 ], function () {
-    Route::post('comments/{video}', 'CommentController@store');
-    Route::post('votes/{entity_type}/{entity_id}/{vote_type}', 'VoteController@vote');
-    Route::resource('channels/{channel}/subscriptions', 'SubscriptionController')->only(['store', 'destroy']);
-    Route::get('channels/{channel}/videos', 'UploadVideoController@index')->name('channel.upload');
-    Route::post('channels/{channel}/videos', 'UploadVideoController@store');
+    Route::post('comments/{video}', [\App\Http\Controllers\CommentController::class, 'store']);
+    Route::post('votes/{entity_type}/{entity_id}/{vote_type}', [\App\Http\Controllers\VoteController::class, '@vote']);
+    Route::resource('channels/{channel}/subscriptions', \App\Http\Controllers\SubscriptionController::class)->only(['store', 'destroy']);
+    Route::get('channels/{channel}/videos', [\App\Http\Controllers\UploadVideoController::class, 'index'])->name('channel.upload');
+    Route::post('channels/{channel}/videos', [\App\Http\Controllers\UploadVideoController::class, 'store']);
 });
+
+Auth::routes();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laratube\Http\Requests\Videos;
+namespace App\Http\Requests\Videos;
 
 use Illuminate\Foundation\Http\FormRequest;
 

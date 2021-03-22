@@ -1,11 +1,17 @@
 <?php
 
-namespace Laratube;
+namespace App\Models;
 
-use Laratube\Channel;
+use App\Application\Uuids;
+use App\Models\Channel;
+use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
+    use Uuids;
+
+    protected $guarded = [];
+
     public function channel()
     {
         return $this->belongsTo(Channel::class);

@@ -1,10 +1,10 @@
 <?php
 
-namespace Laratube\Jobs\Videos;
+namespace App\Jobs\Videos;
 
 use FFMpeg;
 //use FFMpeg\FFMpeg;
-use Laratube\Video;
+use App\Models\Video;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -41,7 +41,7 @@ class ConvertForStreaming implements ShouldQueue
         $mid = (new X264('aac'))->setKiloBitrate(250);
         $high = (new X264('aac'))->setKiloBitrate(500);
 
-        FFMpeg::fromDisk('local')
+        FFMpeg::fromDisk('public')
             ->open($this->video->path)
             ->exportForHLS()
             ->onProgress(function ($percentage) {
@@ -52,12 +52,12 @@ class ConvertForStreaming implements ShouldQueue
             ->addFormat($low)
             ->addFormat($mid)
             ->addFormat($high)
-            ->save("public/videos/{$this->video->id}/{$this->video->id}.m3u8"); // m3u8 is extension required for streaming files.
+            ->save("/FFMPEG/videos/{$this->video->id}/{$this->video->id}.m3u8"); // m3u8 is extension required for streaming files.
 
         Storage::delete($this->video->path);
 
         $this->video->update([
-                'percentage' => 100
-            ]);
+            'percentage' => 100
+        ]);
     }
 }

@@ -138,6 +138,7 @@
                                 @foreach($videos as $video )
                                     <tr>
                                         <td><img width="40px" height="40px" src="{{ $video->thumbnail }}" alt=""></td>
+{{--                                        <td><img width="40px" height="40px" src="{{ asset($video->thumbnail) }}" alt=""></td>--}}
                                         <td>{{ $video->title }}</td>
                                         <td>{{ $video->views }}</td>
                                         <td>{{ $video->percentage === 100 ? 'Live' : 'processing... ' . $video->percentage . '%'}}</td>

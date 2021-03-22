@@ -15,7 +15,7 @@
 
                 <div class="card-body">
                     <video-js id="video" class="vjs-default-skin" controls preload="auto" width="640" height="268">
-                        <source src='{{ asset(Storage::url("videos/{$video->id}/{$video->id}.m3u8")) }}' type="application/x-mpegURL">
+                        <source src='{{ asset("FFMPEG/videos/{$video->id}/{$video->id}.m3u8") }}' type="application/x-mpegURL">
                     </video-js>
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -38,7 +38,6 @@
                             entity_id="{{ $video->id }}">
                         </votes>
                     </div>
-
 
                     <hr>
 

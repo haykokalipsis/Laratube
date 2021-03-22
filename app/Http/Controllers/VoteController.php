@@ -1,10 +1,10 @@
 <?php
 
-namespace Laratube\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Laratube\Comment;
-use Laratube\Video;
+use App\Models\Comment;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class VoteController extends Controller

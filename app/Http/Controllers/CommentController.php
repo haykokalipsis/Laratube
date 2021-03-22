@@ -1,11 +1,11 @@
 <?php
 
-namespace Laratube\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Laratube\Http\Requests\Comments\StoreCommentRequest;
+use App\Http\Requests\Comments\StoreCommentRequest;
 use Illuminate\Http\Request;
-use Laratube\Comment;
-use Laratube\Video;
+use App\Models\Comment;
+use App\Models\Video;
 
 class CommentController extends Controller
 {
@@ -18,7 +18,7 @@ class CommentController extends Controller
     {
         return $comment->replies()->paginate(3);
     }
-    
+
     public function store(StoreCommentRequest $request, Video $video)
     {
         return auth()->user()->comments()->create([
@@ -27,5 +27,5 @@ class CommentController extends Controller
                 'comment_id' => $request->comment_id
             ])
                 ->fresh(); // We call fresh to get the eager loaded relationships for the model
-    } 
+    }
 }

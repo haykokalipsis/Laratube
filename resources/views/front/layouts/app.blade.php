@@ -55,7 +55,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('channels.show', auth()->user()->channel) }}">
+
+                                    <a class="dropdown-item" href="{{ route('channels.show', auth()->user()->channel->id) }}">
                                         {{ __('My Channel') }}
                                     </a>
 
@@ -97,6 +98,5 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     @stack('scripts')
-
 </body>
 </html>

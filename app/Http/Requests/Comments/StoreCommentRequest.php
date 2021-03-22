@@ -1,6 +1,6 @@
 <?php
 
-namespace Laratube\Http\Requests\Comments;
+namespace App\Http\Requests\Comments;
 
 use Illuminate\Foundation\Http\FormRequest;
 

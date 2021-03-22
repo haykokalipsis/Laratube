@@ -1,17 +1,17 @@
 <?php
 
-namespace Laratube;
+namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model; Удоляй
-
-use Laratube\Video;
+use App\Application\Uuids;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Channel extends Model implements HasMedia
 {
-    use HasMediaTrait;
+    use HasMediaTrait, Uuids;
+    protected $guarded = [];
 
     // Relationships
     public function user()
