@@ -29,12 +29,12 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div v-if=" ! video.thumbnail" class="d-flex justify-content-center align-items-center" style="height: 180px; color: white; font-size: 18px; background: #808080;">
+                                        <div v-if=" ! video.thumbnail_url" class="d-flex justify-content-center align-items-center" style="height: 180px; color: white; font-size: 18px; background: #808080;">
                                             Loading thumbnail ...
                                         </div>
 
 {{--                                        <img v-else :src="video.thumbnail" style="width: 100%;" alt="">--}}
-                                        <img v-else :src="video.thumbnail" style="width: 100%;" alt="">
+                                        <img v-else :src="video.thumbnail_url" style="width: 100%;" alt="">
 {{--                                        <img v-else :src="{{Storage()->url('video.thumbnail')}}" style="width: 100%;" alt="">--}}
                                     </div>
 

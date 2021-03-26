@@ -137,8 +137,9 @@
                             <tbody>
                                 @foreach($videos as $video )
                                     <tr>
-                                        <td><img width="40px" height="40px" src="{{ $video->thumbnail }}" alt=""></td>
-{{--                                        <td><img width="40px" height="40px" src="{{ asset($video->thumbnail) }}" alt=""></td>--}}
+{{--                                        <td><img width="40px" height="40px" src="{{ \Illuminate\Support\Facades\Storage::url($video->thumbnail) }}" alt=""></td>--}}
+                                        <td><img width="40px" height="40px" src="{{ $video->thumbnail_url }}" alt=""></td>
+{{--                                        <td><img width="40px" height="40px" src="{{ $tuxt }}" alt=""></td>--}}
                                         <td>{{ $video->title }}</td>
                                         <td>{{ $video->views }}</td>
                                         <td>{{ $video->percentage === 100 ? 'Live' : 'processing... ' . $video->percentage . '%'}}</td>

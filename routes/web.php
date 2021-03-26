@@ -29,9 +29,11 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::resource('channels', \App\Http\Controllers\ChannelController::class)->only(['show', 'update', 'destroy']);
 Route::get('videos/{video}/comments', [\App\Http\Controllers\CommentController::class, 'comments']);
 Route::get('comments/{comment}/replies', [\App\Http\Controllers\CommentController::class, 'replies']);
-Route::get('videos/{video}', [\App\Http\Controllers\UploadVideoController::class, 'show'])->name('videos.show');
+Route::get('videos/{video}', [\App\Http\Controllers\VideoController::class, 'show'])->name('videos.show');
 Route::put('videos/{video}', [\App\Http\Controllers\VideoController::class, 'updateViews']);
 Route::put('videos/{video}/update', [\App\Http\Controllers\VideoController::class, 'update'])->middleware(['auth'])->name('videos.update');
+
+Route::get('video-links/{video_id}', [\App\Http\Controllers\VideoController::class, 'get_public_urls'])->name('video-links.show');
 
 Route::group([
     'middleware' => ['auth']

@@ -31,13 +31,4 @@ class UploadVideoController extends Controller
 
         return $video;
     }
-
-    public function show(Video $video)
-    {
-        if (request()->wantsJson()) {
-            return $video;
-        }
-
-        return view('front.pages.videos.index', compact('video'));
-    }
 }

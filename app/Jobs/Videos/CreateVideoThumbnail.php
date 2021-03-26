@@ -34,13 +34,13 @@ class CreateVideoThumbnail implements ShouldQueue
      */
     public function handle()
     {
-        FFMpeg::fromDisk('public')
+        FFMpeg::fromDisk('dropbox')
 //            ->open('FFMPEG/channels/0ba21459-4e7f-4041-95bc-bc62187334e3/videos/KoesIx09gybZHtHwrelj3yvUZHTrlHE3HFtDCg8D.mkv')
             ->open($this->video->path)
 //            ->open('http://laratube.test/FFMPEG/channels/0ba21459-4e7f-4041-95bc-bc62187334e3/videos/5KcGbYinlOkkVgRt0ylWr0otREHGQFqczCYsf6Qz.mkv')
             ->getFrameFromSeconds(1)
             ->export()
-            ->toDisk('public')
+            ->toDisk('dropbox')
             ->save("/FFMPEG/thumbnails/{$this->video->id}.png");
 
         $this->video->update([

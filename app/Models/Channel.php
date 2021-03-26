@@ -35,7 +35,7 @@ class Channel extends Model implements HasMedia
         if ( ! auth()->check())
             return false;
 
-        return $this->user_id === auth()->user()->id;
+        return $this->user_id === auth()->id();
     }
 
     public function registerMediaConversions( ? Media $media = null)

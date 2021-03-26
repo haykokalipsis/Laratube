@@ -41,7 +41,7 @@ class ConvertForStreaming implements ShouldQueue
         $mid = (new X264('aac'))->setKiloBitrate(250);
         $high = (new X264('aac'))->setKiloBitrate(500);
 
-        FFMpeg::fromDisk('public')
+        FFMpeg::fromDisk('dropbox')
             ->open($this->video->path)
             ->exportForHLS()
             ->onProgress(function ($percentage) {
@@ -52,7 +52,7 @@ class ConvertForStreaming implements ShouldQueue
             ->addFormat($low)
             ->addFormat($mid)
             ->addFormat($high)
-            ->save("/FFMPEG/videos/{$this->video->id}/{$this->video->id}.m3u8"); // m3u8 is extension required for streaming files.
+            ->save("/FFMPEG/videos/{$this->video->id}/original/{$this->video->id}.m3u8"); // m3u8 is extension required for streaming files.
 
         Storage::delete($this->video->path);
 

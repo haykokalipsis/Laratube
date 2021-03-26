@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Channel\UpdateChannelRequest;
+use App\Http\Resources\VideoResource;
 use Illuminate\Http\Request;
 use App\Models\Channel;
+use Illuminate\Support\Facades\Storage;
+
 //use App\Http\Requests\Channel\UpdateChannelRequest;
 
 class ChannelController extends Controller
@@ -11,7 +15,6 @@ class ChannelController extends Controller
 
     public function __construct()
     {
-//        dd(6);
         $this->middleware(['auth'])->only(['update']);
     }
 
@@ -48,7 +51,6 @@ class ChannelController extends Controller
 
     public function show(Channel $channel)
     {
-//        dd($id);
         $videos = $channel->videos()->paginate(2);
         return view('front.pages.channels.show-or-edit', compact(['channel', 'videos']));
     }
